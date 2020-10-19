@@ -1,0 +1,300 @@
+<WindowManager>
+    Main:
+        id: main
+        name: 'main'
+    Detail:
+        id: detail
+        name: 'detail'
+    TalkingScreen:
+        id: talkingScreen
+        name: 'talking'
+    FavoriteScreen:
+        id: favorite
+        name: 'favorite'
+    DoneScreen:
+        id: doneScreen
+        name: 'done'
+    SettingsScreen:
+        id: mySettings
+        name: 'settings_screen'
+
+<MDToolbarBack@MDToolbar>:
+    size_hint_y: None
+    height: self.theme_cls.standard_increment
+    padding: '5dp'
+    spacing: '12dp'
+
+    MDIconButton:
+        icon: 'arrow-left'
+        pos_hint: {'center_y': .5}
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+        on_press: app.window_manager.current = 'main'
+
+    MDLabel:
+        text: 'App'
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+
+<ItemConfirmSeconds>
+    CheckboxLeftWidget:
+        id: check_seconds
+        active: root.active_seconds
+        group: "check_seconds"
+        on_release: root.set_icon(check_seconds)
+
+<ItemConfirmQuestions>
+    CheckboxLeftWidget:
+        id: check_questions
+        active: root.active_questions
+        group: "check_questions"
+        on_release: root.set_icon(check_questions)
+
+<FavoriteScreen>
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbarBack:
+
+        ScrollView:
+            BoxLayout:
+#                padding: 30
+                spacing: 50
+                size_hint_y: None
+                orientation: 'vertical'
+                height: self.minimum_height
+                MDList:
+                    spacing: 15
+                    id: box
+
+<SettingsScreen>
+    MDBoxLayout:
+        pos_hint: {'top': 1}
+        adaptive_height: True
+        orientation: 'vertical'
+
+        MDToolbarBack:
+
+        MDBoxLayout:
+            orientation: 'horizontal'
+            adaptive_height: True
+            MDLabel:
+                padding: (30, 0)
+                text: 'Minutes'
+            MDFlatButton:
+                id: user_seconds
+                text: str(root.seconds)
+                on_release: root.seconds_change()
+        MDBoxLayout:
+            orientation: 'horizontal'
+            adaptive_height: True
+            MDLabel:
+                padding: (30, 0)
+                text: 'Questions'
+            MDFlatButton:
+                id: user_questions
+                text: str(root.questions)
+                on_release: root.questions_change()
+<DoneScreen>
+    BoxLayout:
+        orientation: 'vertical'
+        MDLabel:
+            text: 'I am DoneScreen'
+            halign: 'center'
+        MDRaisedButton:
+            text: 'Ok'
+            pos_hint: {'center_x': .5}
+            on_release:
+                app.window_manager.current = 'main'
+
+<TalkingScreen>
+    MDBoxLayout:
+        orientation: 'vertical'
+        adaptive_height: True
+        pos_hint: {'top': 1}
+#        padding: (0, 10, 0, 0)
+
+        MDToolbar:
+#            title: "MDToolbar"
+            left_action_items: [["window-close", lambda x: root.go_to_home()]]
+            MDTextButton:
+                id: text_button
+                pos_hint: {'center_y': .5}
+                font_size:  '20sp'
+                custom_color: rgba('#F5F5F5')
+
+#
+#            MDChip:
+#                label: '1/5'
+#                icon: ''
+#                font_size:  '40sp'
+##                theme_text_color: 'Custom'
+##                color: rgba('#224099')
+#                text_color: rgba('#F5F5F5')
+
+#                height: '70sp'
+#                pos_hint: {'center_y': .5}
+#
+#            MDChip:
+#                label: '2'
+#                icon: ''
+#                theme_text_color: 'Custom'
+#                text_color: rgba('#000000')
+#                color: 0, 1
+#                pos_hint: {'center_y': .5}
+
+        MDBoxLayout:
+            padding: 25
+            orientation: 'vertical'
+            adaptive_height: True
+            spacing: 55
+
+            MDLabel:
+                text: 'Answer this question'
+                font_size: '20sp'
+
+            MDLabel:
+                text: 'Please, try to talke as much as possible. It is really important for improvining you spoken English'
+
+            GridLayout:
+                cols: 2
+                row_force_default: True
+                row_default_height: 50
+
+                size_hint: (1, None)
+                MDIconButton:
+                    icon: 'play'
+                    size_hint_y: 1
+                    on_release: root.sound_play(root)
+                MDLabel:
+                    id: question
+                    text: root.question
+
+            MDFlatButton:
+                id: count
+                pos_hint: {'center_x': 0.5}
+                on_release:
+                    root.pause()
+
+
+<Detail>
+
+    BoxLayout:
+        id: id_topic
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            MDToolbarBack:
+
+            ScrollView:
+                BoxLayout:
+                    padding: 10
+                    spacing: 50
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: self.minimum_height
+
+                    MDList:
+#                        padding: 20
+#                        spacing: 150
+                        id: box
+
+#                    MDRaisedButton:
+#                        id: my_btn
+#                        text: 'Start'
+#                        pos_hint: {'center_x': .5}
+#                        on_release:
+#                            app.window_manager.current = 'talking'
+
+                    RelativeLayout:
+                        id: my_btn
+
+<Main>
+    BoxLayout:
+        orientation: 'vertical'
+
+        MDToolbar:
+            title: 'App'
+#            MDChip:
+#                label: 'point'
+#                icon: ''
+#                theme_text_color: 'Custom'
+#                text_color: rgba('#000000')
+##                text_color: 1,1,1,1
+#                color: 0, 1
+#                pos_hint: {'center_y': .5}
+#
+            MDIconButton:
+                icon: 'star'
+                id: main_star
+                pos_hint: {'center_y': .5}
+                theme_text_color: 'Custom'
+#                text_color: root.color_main_star
+#                text_color: 1,1,1,1
+#                text_color: rgba('#E91E63')
+                on_press: app.window_manager.current = 'favorite'
+
+            MDIconButton:
+                icon: 'cog'
+                theme_text_color: 'Custom'
+                text_color: 1,1,1,1
+                pos_hint: {'center_y': .5}
+                on_release: app.window_manager.current = 'settings_screen'
+
+        ScrollView:
+            id: my_scrollview
+            BoxLayout:
+#                padding: 30
+                spacing: 50
+                size_hint_y: None
+                orientation: 'vertical'
+                height: self.minimum_height
+                MDList:
+                    spacing: 15
+                    id: box
+
+                RelativeLayout:
+#                    BoxLayout:
+#                        spacing: 15
+#                        padding: 30
+
+                    MDRaisedButton:
+                        text: 'preve'
+                        on_release: root.previous(1)
+                        pos_hint: {'center_x': .4}
+
+                    MDRaisedButton:
+                        text: 'next'
+                        on_release: root.next(1)
+                        pos_hint: {'center_x': .6}
+                Widget:
+
+<TopicCard>
+    on_release:
+        app.window_manager.current = 'detail'
+        app.window_manager.get_screen('detail').ids.id_topic.text = str(self.id)
+
+
+    size_hint: 1, None
+#    size: '230dp', '180dp'
+
+    padding: 30
+#    md_bg_color: rgba('#00000')
+    MDLabel:
+        text: root.topic
+
+#        size_hint_y: None
+#        height: self.texture_size[1]
+#        theme_text_color: 'Custom'
+#        text_color: rgba('#f05c42')
+
+#
+#    MDIconButton:
+#        id: stars
+#        icon: 'star'
+#        theme_text_color: 'Custom'
+##        text_color: root.textColor
+###        text_color: rgba('#045D8D')
+#        on_release: root.parent.parent.parent.parent.parent.favorite(root)
+
+
